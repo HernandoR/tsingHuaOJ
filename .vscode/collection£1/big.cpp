@@ -12,4 +12,5 @@ for(int i=0;i<n;i++){
     printf("%d\n",sum[i]);}
 return 0;
 
+
 }
