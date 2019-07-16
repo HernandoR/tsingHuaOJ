@@ -8,6 +8,7 @@
 int count[26];//字母统计数组
 
 int main(){
+    
     char text[textLimtit];//储存文本
     gets(text);
 
