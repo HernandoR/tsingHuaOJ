@@ -17,14 +17,6 @@ void readData()
             scanf("%d", &data[i][j]);
         }
     }
-    for (int i = 0; i < row; i++)
-    {
-        for (int j = 0; j < row; j++)
-        {
-            printf("%d ", data[i][j]);
-        }
-        printf("\n");
-    }
 }
 
 //数组记录已安排任务，递归安排未安排任务（n!)
@@ -67,7 +59,7 @@ int main()
     printf("%d", sum);
     return 0;
 }
-
+/*
 int main()
 {
     freopen("testData.txt", "r", stdin);
@@ -86,4 +78,4 @@ int main()
     //fclose(fp);
     fclose(stdin);
     fclose(stdout);
-}
+}*/
