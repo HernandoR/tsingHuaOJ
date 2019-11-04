@@ -1,59 +1,89 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+//#include <vector>
 using namespace std;
 
-/* 
-struct workerOnJob{
-    int workerNum;
-    int jobNum;
-    int time;
-};
-
-workerOnJob 
-*/
-int** readData(int** data,int row){//读取数据（方阵），{指针data,行数}
-    data = new int* [row];//创建行
-    for(int i=0;i<row;i++){
-        data[i] = new int*[row];//创建列
-    }
-    return data;
-}
-
-inline int miniMize (int* rowData,int num) {//找到一行中的最小值
-    int miniData=0
-    for(int i=1,i<num,i++){
-        if(rowData[i]<rowData[miniData]) miniData=i;
-    }
-    return i;
-}
-
-handin(int** data,int* solution,int row){
-    int time=0
-    for(int i=0,i<row,i++)[
-        time+=data[i][solution[i]];
-    ]
-    printf("%d",time);
-}
-
-bool checkout(int* data,int dataLength){
-    for(int t,i=0;i<dataLength;i++){
-        for(t=i+1;t<row,t++){
-            
+int **data; //data store
+int *solution;
+int row;
+int sum = 50001;
+void readData()
+{                          //读取数据（方阵），{指针data,行数}
+    data = new int *[row]; //创建行
+    for (int i = 0; i < row; i++)
+    {
+        data[i] = new int[row]; //创建列
+        for (int j = 0; j < row; j++)
+        {
+            scanf("%d", &data[i][j]);
         }
     }
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            printf("%d ", data[i][j]);
+        }
+        printf("\n");
+    }
 }
 
-int main(){
-    int row;
-    int** data;//data store
-    int* solution;
-    cin >> row;
-    readData(data,row);
-    solution = new int* [row];
-    for(int i=0;i<row;i++){
-        solution[i]=miniMize(data[i],row);
+//数组记录已安排任务，递归安排未安排任务（n!)
+void search(int serialNum)
+{
+    if (serialNum == row)
+    {
+
+        int temp = 0;
+        for (int i = 0; i < row; i++)
+        {
+            temp = temp + data[i][solution[i]];
+        }
+        if (temp < sum)
+            sum = temp;
     }
-    if(checkout)
-    handin(data,solution,row);
+    for (int i = 0; i < row; i++)
+    {
+        int flag = 1;
+        solution[serialNum] = i;
+        for (int j = 0; j < serialNum; j++)
+        {
+            if (solution[j] == solution[serialNum])
+            {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag)
+            search(serialNum + 1);
+    }
+}
+
+int main()
+{
+    cin >> row;
+    readData();
+    solution = new int[row];
+    search(0);
+    printf("%d", sum);
     return 0;
+}
+
+int main()
+{
+    freopen("testData.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+
+    time_t begin, end;
+    double ret;
+    begin = clock();
+
+    experiment();
+
+    end = clock();
+    ret = (double)(end - begin) * 1000 / CLOCKS_PER_SEC;
+    printf("\n runtime:%f", ret);
+
+    //fclose(fp);
+    fclose(stdin);
+    fclose(stdout);
 }
