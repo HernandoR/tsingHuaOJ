@@ -5,7 +5,7 @@ using namespace std;
 int **data; //data store
 int *solution;
 int row;
-int sum = 50001;
+int sum = 160001;
 void readData()
 {                          //读取数据（方阵），{指针data,行数}
     data = new int *[row]; //创建行
@@ -32,6 +32,7 @@ void search(int serialNum)
         }
         if (temp < sum)
             sum = temp;
+        temp = 0;
     }
     for (int i = 0; i < row; i++)
     {
@@ -50,7 +51,7 @@ void search(int serialNum)
     }
 }
 
-int main()
+int experiment()
 {
     cin >> row;
     readData();
@@ -59,7 +60,7 @@ int main()
     printf("%d", sum);
     return 0;
 }
-/*
+
 int main()
 {
     freopen("testData.txt", "r", stdin);
@@ -78,4 +79,4 @@ int main()
     //fclose(fp);
     fclose(stdin);
     fclose(stdout);
-}*/
+}
