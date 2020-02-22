@@ -3,45 +3,21 @@
 //#include <vector>
 using namespace std;
 
+/*
+2020.2.20
+混编data选取最小值，在小值并行时选取小值错误。
+应当使用男女配对的方法，保留图和位置。
+*/
 int **data; //data store
 int **datacopy;
-
-int *solution;
-
 int row = 0;
-int sum = 160001;
-
 typedef struct edge
 {
     int people;
     int time;
     int task;
 } edge;
-/*
-void readData()
-{                          //读取数据（方阵），{指针data,行数}
-    data = new int *[row]; //创建行
-    memset(data, 0, sizeof(data));
-    for (int i = 0; i < row; i++)
-    {
-        data[i] = new int[row]; //创建列
-        for (int j = 0; j < row; j++)
-        {
-            scanf("%d", &data[i][j]);
-        }
-    }
-    datacopy = new int *[row]; //创建行
-    memset(datacopy, 0, sizeof(datacopy));
-    for (int i = 0; i < row; i++)
-    {
-        data[i] = new int[row]; //创建列
-        for (int j = 0; j < row; j++)
-        {
-            datacopy[i][j] = data[i][j];
-        }
-    }
-}
-*/
+
 void readData2(edge *edgeData)
 {
 
@@ -84,7 +60,7 @@ void QuickSort_LowFront(edge a[], int numsize)
     }
 }
 
-int arrange(edge edgeData[], int row)
+int arrange(edge edgeData[][], int row)
 {
     int *PeopleDoneList = new int[row];
     int *TaskDoneList = new int[row];
@@ -105,40 +81,7 @@ int arrange(edge edgeData[], int row)
     return totalTime;
 }
 
-//数组记录已安排任务，递归安排未安排任务（n!)
-/*
-void search(int serialNum)
-{
-    if (serialNum == row)
-    {
-
-        int temp = 0;
-        for (int i = 0; i < row; i++)
-        {
-            temp = temp + data[i][solution[i]];
-        }
-        if (temp < sum)
-            sum = temp;
-        temp = 0;
-    }
-    for (int i = 0; i < row; i++)
-    {
-        int flag = 1;
-        solution[serialNum] = i;
-        for (int j = 0; j < serialNum; j++)
-        {
-            if (solution[j] == solution[serialNum])
-            {
-                flag = 0;
-                break;
-            }
-        }
-        if (flag)
-            search(serialNum + 1);
-    }
-}
-*/
-int experiment()
+int main()
 {
     edge *edgeData;
     cin >> row;
@@ -147,25 +90,4 @@ int experiment()
     QuickSort_LowFront(edgeData, row * row);
     int time = arrange(edgeData, row);
     printf("%d", time);
-    return time;
-}
-
-int main()
-{
-    freopen("testData.txt", "r", stdin);
-    freopen("out.txt", "w", stdout);
-
-    time_t begin, end;
-    double ret;
-    begin = clock();
-
-    experiment();
-
-    end = clock();
-    ret = (double)(end - begin) * 1000 / CLOCKS_PER_SEC;
-    printf("\n runtime:%f", ret);
-
-    //fclose(fp);
-    fclose(stdin);
-    fclose(stdout);
 }
