@@ -46,6 +46,11 @@ int eightQueen()
     cout << cnt << endl;
     return 0;
 }
+// TODO
+// FIXME
+// tag
+// done
+// MEMO
 
 int main()
 {
@@ -56,7 +61,8 @@ int main()
     double ret;
     begin = clock();
 
-    eightQueen();
+    main0();
+    //eightQueen();
 
     end = clock();
     ret = (double)(end - begin) * 1000 / CLOCKS_PER_SEC;
